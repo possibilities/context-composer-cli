@@ -11,8 +11,15 @@ async function main() {
     .version(packageJson.version)
     .argument('<file>', 'markdown file to process')
     .action((file: string) => {
-      const output = composeTags(file)
-      process.stdout.write(output)
+      process.stdout.write(
+        composeTags(file, {
+          indentSpaces: 2,
+          rootTag: false,
+          convertPathToTagStrategy: 'tail',
+          liftAllTagsToRoot: true,
+          inlineCommonTags: true,
+        }),
+      )
     })
 
   try {
