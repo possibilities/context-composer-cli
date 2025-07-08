@@ -15,9 +15,9 @@ async function main() {
         composeTags(file, {
           indentSpaces: 2,
           rootTag: false,
-          convertPathToTagStrategy: 'tail',
           liftAllTagsToRoot: true,
           inlineCommonTags: true,
+          convertPathToTagStrategy: 'last',
         }),
       )
     })
