@@ -10,6 +10,9 @@ importers:
       commander:
         specifier: ^12.0.0
         version: 12.1.0
+      tag-composer:
+        specifier: ^0.1.1
+        version: 0.1.1
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -1022,6 +1025,12 @@ packages:
     engines: { node: '>=18.0.0', npm: '>=8.0.0' }
     hasBin: true
 
+  sax@1.4.1:
+    resolution:
+      {
+        integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==,
+      }
+
   semver@7.7.2:
     resolution:
       {
@@ -1107,6 +1116,14 @@ packages:
         integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==,
       }
     engines: { node: '>=4' }
+
+  tag-composer@0.1.1:
+    resolution:
+      {
+        integrity: sha512-saGmaw0+tCz6yZ/GCPEmE8K1WtmmBgcyV4UwUdphdl9qXquCuAFZTcjpxA6JYbG9SdcJrNx6GGXfT5Giqk+Mcw==,
+      }
+    engines: { node: '>=18' }
+    hasBin: true
 
   thenify-all@1.6.0:
     resolution:
@@ -1248,6 +1265,19 @@ packages:
         integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==,
       }
     engines: { node: '>=12' }
+
+  xml-js@1.6.11:
+    resolution:
+      {
+        integrity: sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==,
+      }
+    hasBin: true
+
+  zod@3.25.76:
+    resolution:
+      {
+        integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==,
+      }
 
 snapshots:
   '@esbuild/aix-ppc64@0.25.5':
@@ -1729,6 +1759,8 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.43.0
       fsevents: 2.3.3
 
+  sax@1.4.1: {}
+
   semver@7.7.2: {}
 
   shebang-command@2.0.0:
@@ -1780,6 +1812,12 @@ snapshots:
   supports-color@5.5.0:
     dependencies:
       has-flag: 3.0.0
+
+  tag-composer@0.1.1:
+    dependencies:
+      commander: 12.1.0
+      xml-js: 1.6.11
+      zod: 3.25.76
 
   thenify-all@1.6.0:
     dependencies:
@@ -1868,3 +1906,9 @@ snapshots:
       ansi-styles: 6.2.1
       string-width: 5.1.2
       strip-ansi: 7.1.0
+
+  xml-js@1.6.11:
+    dependencies:
+      sax: 1.4.1
+
+  zod@3.25.76: {}

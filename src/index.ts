@@ -1,4 +1,5 @@
 import { Command } from 'commander'
+import { composeTags } from 'tag-composer'
 import packageJson from '../package.json' assert { type: 'json' }
 
 async function main() {
@@ -8,8 +9,10 @@ async function main() {
     .name('context-composer')
     .description('Context Composer CLI')
     .version(packageJson.version)
-    .action(() => {
-      console.log('hello world')
+    .argument('<file>', 'markdown file to process')
+    .action((file: string) => {
+      const output = composeTags(file)
+      process.stdout.write(output)
     })
 
   try {
@@ -19,15 +22,24 @@ async function main() {
     })
 
     await program.parseAsync(process.argv)
-  } catch (error: any) {
-    if (
-      error.code === 'commander.help' ||
-      error.code === 'commander.helpDisplayed' ||
-      error.code === 'commander.version'
-    ) {
-      process.exit(0)
+  } catch (error) {
+    if (error instanceof Error) {
+      const commanderError = error as Error & { code?: string }
+      if (
+        commanderError.code === 'commander.help' ||
+        commanderError.code === 'commander.helpDisplayed' ||
+        commanderError.code === 'commander.version'
+      ) {
+        process.exit(0)
+      }
+      if (error.message.startsWith('Error: ')) {
+        console.error(error.message)
+      } else {
+        console.error('Error:', error.message)
+      }
+    } else {
+      console.error('Error:', error)
     }
-    console.error('Error:', error.message || error)
     process.exit(1)
   }
 }
