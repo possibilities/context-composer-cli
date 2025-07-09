@@ -351,7 +351,13 @@ async function main(): Promise<void> {
       ) {
         process.exit(0)
       }
-      console.error(formatErrorMessage(error))
+      // Commander errors are already displayed via writeErr, don't print again
+      if (
+        !commanderError.code ||
+        !commanderError.code.startsWith('commander.')
+      ) {
+        console.error(formatErrorMessage(error))
+      }
     } else {
       console.error('Error:', error)
     }
