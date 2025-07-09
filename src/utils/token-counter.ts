@@ -14,10 +14,6 @@ export function countTokens(text: string): number {
   return tokenEncoder.encode(text).length
 }
 
-export function countCharacters(text: string): number {
-  return text.length
-}
-
 export function formatNumber(num: number): string {
   return num.toLocaleString()
 }
