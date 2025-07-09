@@ -115,7 +115,7 @@ async function main(): Promise<void> {
       }
       const output = composeTags(file, {
         ...defaultComposeOptions,
-        indentSpaces: process.stdout.isTTY ? 2 : 0,
+        indentSpaces: process.stdout.isTTY ? 4 : 0,
       })
 
       process.stdout.write(output)
