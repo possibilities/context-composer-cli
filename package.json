@@ -8,6 +8,10 @@
   "bin": {
     "context-composer": "./dist/cli.js"
   },
+  "files": [
+    "dist",
+    "readme.md"
+  ],
   "scripts": {
     "build": "tsup",
     "build:watch": "nodemon --watch src/ --ext ts --exec tsup",
