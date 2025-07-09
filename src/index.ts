@@ -125,7 +125,6 @@ async function main(): Promise<void> {
       }
     })
 
-  // Validate subcommand
   program
     .command('validate')
     .description('Validate multiple markdown files')
@@ -149,7 +148,6 @@ async function main(): Promise<void> {
       }
     })
 
-  // Dump subcommand
   program
     .command('dump')
     .description('Process multiple markdown files and save to directory')

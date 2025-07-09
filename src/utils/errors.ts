@@ -7,7 +7,7 @@ export interface ProcessingError {
 export function formatErrorMessage(error: unknown): string {
   if (error instanceof Error) {
     let message = error.message
-    // Remove redundant "Error: " prefix if present
+
     if (message.startsWith('Error: ')) {
       message = message.slice(7)
     }
