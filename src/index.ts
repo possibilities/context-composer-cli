@@ -13,6 +13,13 @@ async function main() {
     .version(packageJson.version)
     .argument('<file>', 'markdown file to process')
     .action((file: string) => {
+      const command = program
+      if (command.args.length > 1) {
+        console.error(
+          'Error: Too many arguments. Only one file can be processed at a time.',
+        )
+        process.exit(1)
+      }
       process.stdout.write(
         composeTags(file, {
           indentSpaces: process.stdout.isTTY ? 2 : 0,
