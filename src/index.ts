@@ -43,6 +43,7 @@ async function main() {
       const output = composeTags(file, {
         indentSpaces: process.stdout.isTTY ? 2 : 0,
         rootTag: false,
+        tagCase: 'pascal',
         liftAllTagsToRoot: true,
         inlineCommonTags: true,
         convertPathToTagStrategy: 'last',
