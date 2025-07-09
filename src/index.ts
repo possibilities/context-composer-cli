@@ -136,6 +136,7 @@ async function main(): Promise<void> {
     .name('context-composer')
     .description('Context Composer CLI')
     .version(packageJson.version)
+    .showHelpAfterError()
 
   program
     .argument('<file>', 'markdown file to process')
@@ -338,6 +339,10 @@ async function main(): Promise<void> {
     program.exitOverride()
     program.configureOutput({
       writeErr: str => process.stderr.write(str),
+      outputError: (str, write) => {
+        const cleanedError = str.replace(/^error: /, '')
+        write(cleanedError)
+      },
     })
 
     await program.parseAsync(process.argv)
