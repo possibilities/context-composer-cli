@@ -6,7 +6,7 @@
   "description": "Context Composer CLI",
   "type": "module",
   "bin": {
-    "context-composer": "./dist/cli.js"
+    "context-composer-next": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsup",

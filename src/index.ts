@@ -15,7 +15,7 @@ async function main() {
     .action((file: string) => {
       process.stdout.write(
         composeTags(file, {
-          indentSpaces: 2,
+          indentSpaces: process.stdout.isTTY ? 2 : 0,
           rootTag: false,
           liftAllTagsToRoot: true,
           inlineCommonTags: true,
