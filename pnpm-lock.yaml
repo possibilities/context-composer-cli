@@ -14,7 +14,7 @@ importers:
         version: 12.1.0
       tag-composer:
         specifier: file:~/code/tag-composer
-        version: file:../../code/tag-composer
+        version: file:../tag-composer
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -1119,8 +1119,8 @@ packages:
       }
     engines: { node: '>=4' }
 
-  tag-composer@file:../../code/tag-composer:
-    resolution: { directory: ../../code/tag-composer, type: directory }
+  tag-composer@file:../tag-composer:
+    resolution: { directory: ../tag-composer, type: directory }
     engines: { node: '>=18' }
     hasBin: true
 
@@ -1812,7 +1812,7 @@ snapshots:
     dependencies:
       has-flag: 3.0.0
 
-  tag-composer@file:../../code/tag-composer:
+  tag-composer@file:../tag-composer:
     dependencies:
       commander: 12.1.0
       xml-js: 1.6.11
