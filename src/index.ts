@@ -232,8 +232,8 @@ async function main(): Promise<void> {
     )
 
   program
-    .command('dump')
-    .description('dump rendered markdown')
+    .command('export')
+    .description('export rendered markdown')
     .argument('<files...>', 'markdown files to process')
     .option(
       '-c, --commands-path <path>',
