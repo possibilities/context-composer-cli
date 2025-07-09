@@ -15,6 +15,9 @@ importers:
       tag-composer:
         specifier: file:~/code/tag-composer
         version: file:../tag-composer
+      tiktoken:
+        specifier: ^1.0.21
+        version: 1.0.21
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -1137,6 +1140,12 @@ packages:
         integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==,
       }
 
+  tiktoken@1.0.21:
+    resolution:
+      {
+        integrity: sha512-/kqtlepLMptX0OgbYD9aMYbM7EFrMZCL7EoHM8Psmg2FuhXoo/bH64KqOiZGGwa6oS9TPdSEDKBnV2LuB8+5vQ==,
+      }
+
   tinyexec@0.3.2:
     resolution:
       {
@@ -1825,6 +1834,8 @@ snapshots:
   thenify@3.3.1:
     dependencies:
       any-promise: 1.3.0
+
+  tiktoken@1.0.21: {}
 
   tinyexec@0.3.2: {}
 

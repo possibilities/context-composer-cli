@@ -1,8 +1,28 @@
 import { Command } from 'commander'
 import { composeTags } from 'tag-composer'
 import packageJson from '../package.json' assert { type: 'json' }
+import {
+  countTokens,
+  countCharacters,
+  formatNumber,
+} from './utils/token-counter.js'
 
 const tagSortOrder = ['roles', 'rules', 'instructions', 'query']
+
+function displayStats(output: string, version: string): void {
+  const charCount = countCharacters(output)
+  const tokenCount = countTokens(output)
+
+  const banner = `📦 Context Composer v${version}`
+  const separator = '─'.repeat(banner.length)
+
+  process.stderr.write('\n')
+  process.stderr.write('\n')
+  process.stderr.write(`${banner}\n`)
+  process.stderr.write(`${separator}\n`)
+  process.stderr.write(`  Total Chars: ${formatNumber(charCount)} chars\n`)
+  process.stderr.write(` Total Tokens: ${formatNumber(tokenCount)} tokens\n`)
+}
 
 async function main() {
   const program = new Command()
@@ -20,16 +40,20 @@ async function main() {
         )
         process.exit(1)
       }
-      process.stdout.write(
-        composeTags(file, {
-          indentSpaces: process.stdout.isTTY ? 2 : 0,
-          rootTag: false,
-          liftAllTagsToRoot: true,
-          inlineCommonTags: true,
-          convertPathToTagStrategy: 'last',
-          sortTagsToBottom: tagSortOrder,
-        }),
-      )
+      const output = composeTags(file, {
+        indentSpaces: process.stdout.isTTY ? 2 : 0,
+        rootTag: false,
+        liftAllTagsToRoot: true,
+        inlineCommonTags: true,
+        convertPathToTagStrategy: 'last',
+        sortTagsToBottom: tagSortOrder,
+      })
+
+      process.stdout.write(output)
+
+      if (process.stdout.isTTY) {
+        displayStats(output, packageJson.version)
+      }
     })
 
   try {
