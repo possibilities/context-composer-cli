@@ -2,6 +2,8 @@ import { Command } from 'commander'
 import { composeTags } from 'tag-composer'
 import packageJson from '../package.json' assert { type: 'json' }
 
+const tagSortOrder = ['roles', 'rules', 'instructions', 'query']
+
 async function main() {
   const program = new Command()
 
@@ -18,6 +20,7 @@ async function main() {
           liftAllTagsToRoot: true,
           inlineCommonTags: true,
           convertPathToTagStrategy: 'last',
+          sortTagsToBottom: tagSortOrder,
         }),
       )
     })

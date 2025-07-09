@@ -4,6 +4,8 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+pnpmfileChecksum: sha256-bpp9bb239R0k4gBMRYUVsadZz75vsgjUbxxQqu3g1cg=
+
 importers:
   .:
     dependencies:
@@ -11,8 +13,8 @@ importers:
         specifier: ^12.0.0
         version: 12.1.0
       tag-composer:
-        specifier: ^0.1.1
-        version: 0.1.1
+        specifier: file:~/code/tag-composer
+        version: file:../../code/tag-composer
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -1117,11 +1119,8 @@ packages:
       }
     engines: { node: '>=4' }
 
-  tag-composer@0.1.1:
-    resolution:
-      {
-        integrity: sha512-saGmaw0+tCz6yZ/GCPEmE8K1WtmmBgcyV4UwUdphdl9qXquCuAFZTcjpxA6JYbG9SdcJrNx6GGXfT5Giqk+Mcw==,
-      }
+  tag-composer@file:../../code/tag-composer:
+    resolution: { directory: ../../code/tag-composer, type: directory }
     engines: { node: '>=18' }
     hasBin: true
 
@@ -1813,7 +1812,7 @@ snapshots:
     dependencies:
       has-flag: 3.0.0
 
-  tag-composer@0.1.1:
+  tag-composer@file:../../code/tag-composer:
     dependencies:
       commander: 12.1.0
       xml-js: 1.6.11
