@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join, basename } from 'node:path'
 import packageJson from '../package.json' assert { type: 'json' }
 import { countTokens, formatNumber } from './utils/token-counter.js'
+import { injectAllowedToolsIntoContent } from './utils/frontmatter-tools.js'
 
 const tagSortOrder = ['roles', 'rules', 'instructions', 'query']
 
@@ -172,11 +173,13 @@ async function main(): Promise<void> {
             process.stdout.isTTY,
           )
 
-          const output = composeTags(file, {
+          let output = composeTags(file, {
             ...defaultComposeOptions,
             indentSpaces,
             tagCase: validatedTagCase,
           })
+
+          output = injectAllowedToolsIntoContent(output)
 
           process.stdout.write(output)
 
@@ -304,11 +307,13 @@ async function main(): Promise<void> {
                 }
               }
 
-              const output = composeTags(file, {
+              let output = composeTags(file, {
                 ...defaultComposeOptions,
                 indentSpaces,
                 tagCase: validatedTagCase,
               })
+
+              output = injectAllowedToolsIntoContent(output)
 
               writeFileSync(outputPath, output)
               process.stderr.write(`✓ Processed ${filename}\n`)
@@ -356,7 +361,7 @@ async function main(): Promise<void> {
       ) {
         process.exit(0)
       }
-      // Commander errors are already displayed via writeErr, don't print again
+
       if (
         !commanderError.code ||
         !commanderError.code.startsWith('commander.')
