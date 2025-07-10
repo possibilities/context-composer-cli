@@ -148,7 +148,8 @@ async function main(): Promise<void> {
     )
     .option(...SPACING_OPTIONS.tagCase)
     .option(SPACING_OPTIONS.compact[0], SPACING_OPTIONS.compact[1])
-    .option('--add-allowed-tools', 'inject allowed-tools (default: true)', true)
+    .option('--add-allowed-tools', 'inject allowed-tools (default)')
+    .option('--no-add-allowed-tools', 'disable injection of allowed-tools')
     .action(
       (
         file: string,
@@ -211,6 +212,8 @@ async function main(): Promise<void> {
       SPACING_OPTIONS.compact[0],
       'use compact output (for consistency with other commands)',
     )
+    .option('--add-allowed-tools', 'inject allowed-tools (default)')
+    .option('--no-add-allowed-tools', 'disable injection of allowed-tools')
     .action(
       (
         files: string[],
@@ -218,6 +221,7 @@ async function main(): Promise<void> {
           spaces: string
           tagCase: string
           compact?: boolean
+          addAllowedTools?: boolean
         },
       ) => {
         const results = validateFiles(files)
@@ -252,7 +256,8 @@ async function main(): Promise<void> {
     .option(SPACING_OPTIONS.spaces[0], SPACING_OPTIONS.spaces[1], '0')
     .option(...SPACING_OPTIONS.tagCase)
     .option(...SPACING_OPTIONS.compact)
-    .option('--add-allowed-tools', 'inject allowed-tools (default: true)', true)
+    .option('--add-allowed-tools', 'inject allowed-tools (default)')
+    .option('--no-add-allowed-tools', 'disable injection of allowed-tools')
     .action(
       async (
         files: string[],
