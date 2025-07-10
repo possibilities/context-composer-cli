@@ -148,6 +148,7 @@ async function main(): Promise<void> {
     )
     .option(...SPACING_OPTIONS.tagCase)
     .option(SPACING_OPTIONS.compact[0], SPACING_OPTIONS.compact[1])
+    .option('--add-allowed-tools', 'inject allowed-tools (default: true)', true)
     .action(
       (
         file: string,
@@ -155,6 +156,7 @@ async function main(): Promise<void> {
           spaces: string
           tagCase: string
           compact?: boolean
+          addAllowedTools?: boolean
         },
       ) => {
         const command = program
@@ -179,7 +181,9 @@ async function main(): Promise<void> {
             tagCase: validatedTagCase,
           })
 
-          output = injectAllowedToolsIntoContent(output)
+          if (options.addAllowedTools !== false) {
+            output = injectAllowedToolsIntoContent(output)
+          }
 
           process.stdout.write(output)
 
@@ -248,6 +252,7 @@ async function main(): Promise<void> {
     .option(SPACING_OPTIONS.spaces[0], SPACING_OPTIONS.spaces[1], '0')
     .option(...SPACING_OPTIONS.tagCase)
     .option(...SPACING_OPTIONS.compact)
+    .option('--add-allowed-tools', 'inject allowed-tools (default: true)', true)
     .action(
       async (
         files: string[],
@@ -257,6 +262,7 @@ async function main(): Promise<void> {
           spaces: string
           tagCase: string
           compact?: boolean
+          addAllowedTools?: boolean
         },
       ) => {
         try {
@@ -313,7 +319,9 @@ async function main(): Promise<void> {
                 tagCase: validatedTagCase,
               })
 
-              output = injectAllowedToolsIntoContent(output)
+              if (options.addAllowedTools !== false) {
+                output = injectAllowedToolsIntoContent(output)
+              }
 
               writeFileSync(outputPath, output)
               process.stderr.write(`✓ Processed ${filename}\n`)

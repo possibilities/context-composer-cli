@@ -136,4 +136,4 @@ Then use generated prompts interactively:
 
 ## Future
 
-- The stakes are low so some features are Claude Code specific. In the future we might extract Claude Code specific features to a separate package (e.g. `allowed-tools` frontmatter generation).
+- The stakes are low so some features are Claude Code specific. Claude Code specific features like `allowed-tools` frontmatter generation can be disabled using `--no-add-allowed-tools`.
