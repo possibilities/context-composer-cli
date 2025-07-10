@@ -1,12 +1,12 @@
 # Context Composer CLI
 
-A simple tool for composing context
+A tool for composing context
 
 ## Usage
 
 ## Command line
 
-Create prompt fragments in markdown documents:
+Create prompt fragments as markdown:
 
 ```
 ▶ tree
@@ -43,7 +43,7 @@ Create prompt fragments in markdown documents:
 
 [View my prompt fragments](https://github.com/possibilities/prompts)
 
-Link markdown together using the `@@` directive:
+Link markdown files together using the `@@` directive:
 
 ```markdown
 @@shared/common.md
@@ -51,6 +51,9 @@ Link markdown together using the `@@` directive:
 ```
 
 Then generate tags using the CLI:
+
+- Generates `allowed-tools` in the frontmatter for use by Claude Code
+- Generates tags based on the directory names markdown files are stored in
 
 ```
 ▶ context-composer work-on-typescript-cli.md
@@ -130,3 +133,7 @@ Then use generated prompts interactively:
   /work-on-project            Work on generic project (user)
   /work-on-dotfiles           Work on dotfiles (user)
 ```
+
+## Future
+
+- The stakes are low so some features are Claude Code specific. In the future we might extract Claude Code specific features to a separate package (e.g. `allowed-tools` frontmatter generation).
