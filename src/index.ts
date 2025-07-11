@@ -182,7 +182,8 @@ async function main(): Promise<void> {
             tagCase: validatedTagCase,
           })
 
-          if (options.addAllowedTools !== false) {
+          const parentProgramOptions = program.opts()
+          if (parentProgramOptions.addAllowedTools !== false) {
             output = injectAllowedToolsIntoContent(output)
           }
 
@@ -324,7 +325,8 @@ async function main(): Promise<void> {
                 tagCase: validatedTagCase,
               })
 
-              if (options.addAllowedTools !== false) {
+              const parentProgramOptions = program.opts()
+              if (parentProgramOptions.addAllowedTools !== false) {
                 output = injectAllowedToolsIntoContent(output)
               }
 
