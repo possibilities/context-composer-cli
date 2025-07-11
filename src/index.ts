@@ -6,6 +6,8 @@ import { join, basename } from 'node:path'
 import packageJson from '../package.json' assert { type: 'json' }
 import { countTokens, formatNumber } from './utils/token-counter.js'
 import { injectAllowedToolsIntoContent } from './utils/frontmatter-tools.js'
+import { replaceEmbeddedCommands } from './utils/command-replacer.js'
+import { extractFrontmatter } from './utils/markdown-processor.js'
 
 const tagSortOrder = ['roles', 'rules', 'instructions', 'query']
 
@@ -150,14 +152,21 @@ async function main(): Promise<void> {
     .option(SPACING_OPTIONS.compact[0], SPACING_OPTIONS.compact[1])
     .option('--add-allowed-tools', 'inject allowed-tools (default)')
     .option('--no-add-allowed-tools', 'disable injection of allowed-tools')
+    .option(
+      '--invoke-commands',
+      'execute embedded commands and replace with output',
+    )
+    .option('--strip-frontmatter', 'remove frontmatter from output')
     .action(
-      (
+      async (
         file: string,
         options: {
           spaces: string
           tagCase: string
           compact?: boolean
           addAllowedTools?: boolean
+          invokeCommands?: boolean
+          stripFrontmatter?: boolean
         },
       ) => {
         const command = program
@@ -185,6 +194,15 @@ async function main(): Promise<void> {
           const parentProgramOptions = program.opts()
           if (parentProgramOptions.addAllowedTools !== false) {
             output = injectAllowedToolsIntoContent(output)
+          }
+
+          if (options.invokeCommands) {
+            output = await replaceEmbeddedCommands(output, validatedTagCase)
+          }
+
+          if (options.stripFrontmatter) {
+            const { body } = extractFrontmatter(output)
+            output = body
           }
 
           process.stdout.write(output)
