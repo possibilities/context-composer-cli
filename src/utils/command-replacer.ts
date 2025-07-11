@@ -13,6 +13,26 @@ interface TextContext {
   firstNewlineAfterMatch: number
 }
 
+function detectLineIndentation(lineStart: string): number {
+  const match = lineStart.match(/^(\s*)/)
+  return match ? match[1].length : 0
+}
+
+function detectParentIndentation(context: TextContext): number {
+  if (context.textBeforeOnSameLine.trim().length > 0) {
+    return detectLineIndentation(context.textBeforeOnSameLine)
+  }
+
+  const lines = context.beforeMatch.split('\n')
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (lines[i].trim().length > 0) {
+      return detectLineIndentation(lines[i])
+    }
+  }
+
+  return 0
+}
+
 function extractSurroundingContext(
   content: string,
   matchIndex: number,
@@ -120,11 +140,18 @@ export async function replaceEmbeddedCommands(
         )
       }
 
-      const formattedOutput = formatCommandOutput(command, result, tagCase)
       const context = extractSurroundingContext(
         resultContent,
         originalIndex,
         fullMatch.length,
+      )
+
+      const parentIndent = detectParentIndentation(context)
+      const formattedOutput = formatCommandOutput(
+        command,
+        result,
+        tagCase,
+        parentIndent,
       )
 
       const hasTextBefore = context.textBeforeOnSameLine.trim().length > 0

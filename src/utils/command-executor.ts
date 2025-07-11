@@ -60,20 +60,25 @@ export function formatCommandOutput(
   command: string,
   result: CommandResult,
   tagCase: TagCase,
+  indentSpaces: number,
 ): string {
   const tagName = tagCase === 'pascal' ? 'Command' : 'command'
   const combinedOutput = (result.stdout + result.stderr).trimEnd()
+  const indent = ' '.repeat(indentSpaces)
 
-  const lines = [`<${tagName}>`, `${COMMAND_PROMPT_PREFIX}${command}`]
+  const lines = [
+    `${indent}<${tagName}>`,
+    `${indent}${COMMAND_PROMPT_PREFIX}${command}`,
+  ]
 
   if (combinedOutput) {
     const outputLines = combinedOutput.split('\n')
     outputLines.forEach(line => {
-      lines.push(`  ${line}`)
+      lines.push(`${indent}  ${line}`)
     })
   }
 
-  lines.push(`</${tagName}>`)
+  lines.push(`${indent}</${tagName}>`)
 
   return lines.join('\n')
 }
