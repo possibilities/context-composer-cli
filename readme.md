@@ -1,5 +1,7 @@
 # Context Composer CLI
 
+[![npm version](https://badge.fury.io/js/context-composer.svg)](https://www.npmjs.com/package/context-composer)
+
 A tool for composing context
 
 ## Usage
